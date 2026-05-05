@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#B5532A"/>
+  <rect x="22" y="22" width="468" height="468" rx="92" fill="none" stroke="#1F1A14" stroke-width="22"/>
+  <text x="50%" y="64%" text-anchor="middle" font-size="300" font-family="Georgia, serif" font-weight="900" fill="#FBF5E5">ה</text>
+</svg>

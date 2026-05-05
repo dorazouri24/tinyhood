@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --paper: #fbf5e5;
+  --paper-shade: #f5ebcf;
+  --ink: #1f1a14;
+  --clay: #b5532a;
+  --olive: #4f6b3a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Assistant", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(at 12% -10%, #fae3a6 0%, transparent 55%),
+    radial-gradient(at 88% 110%, #d7e2c5 0%, transparent 50%),
+    radial-gradient(at 50% 50%, #fcefe5 0%, transparent 70%);
+  background-attachment: fixed;
+}
+
+/* paper grain — applied to <body::before> */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12   0 0 0 0 0.10   0 0 0 0 0.08  0 0 0 0.10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 0px);
+}
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #f4c45a;
+  color: #1f1a14;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #efdfb4;
+    border-radius: 8px;
+  }
+}
+
+/* Hebrew numeric tabular feel */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer components {
+  .h-display {
+    @apply font-display tracking-tight2 text-ink-900;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-bold transition active:translate-y-[2px] active:shadow-none disabled:opacity-50 disabled:active:translate-y-0;
+    font-family: "Assistant", sans-serif;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    @apply btn bg-clay-500 text-paper-50 border-2 border-ink-900 shadow-sticker hover:bg-clay-600;
+  }
+  .btn-secondary {
+    @apply btn bg-paper-50 text-ink-900 border-2 border-ink-900 shadow-sticker-sm hover:bg-paper-200;
+  }
+  .btn-olive {
+    @apply btn bg-olive-500 text-paper-50 border-2 border-ink-900 shadow-sticker hover:bg-olive-600;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 font-bold text-ink-700 hover:bg-paper-200 transition;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border-2 border-ink-900 bg-paper-50 px-4 py-3 text-base font-semibold outline-none transition placeholder:text-ink-400 placeholder:font-medium focus:bg-white focus:shadow-sticker-sm;
+  }
+
+  .card {
+    @apply rounded-2xl bg-paper-50 border-2 border-ink-900 shadow-sticker;
+  }
+  .card-soft {
+    @apply rounded-2xl bg-paper-50 border-2 border-ink-900/15 shadow-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-paper-50 text-ink-800 px-3 py-1 text-sm font-bold border-2 border-ink-900;
+  }
+  .chip-clay {
+    @apply chip bg-clay-100 text-clay-700;
+  }
+  .chip-olive {
+    @apply chip bg-olive-100 text-olive-700;
+  }
+  .chip-rose {
+    @apply chip bg-rose-50 text-rose-500;
+  }
+  .chip-selected {
+    @apply chip bg-ink-900 text-paper-50 border-ink-900;
+  }
+
+  .screen {
+    @apply mx-auto w-full max-w-md min-h-full flex flex-col;
+  }
+  .screen-pad {
+    @apply px-5;
+  }
+
+  .sticker-yellow {
+    @apply rounded-2xl bg-butter-300 border-2 border-ink-900 shadow-sticker;
+  }
+
+  .label-eyebrow {
+    @apply inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-clay-600;
+  }
+
+  .divider-doodle {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M0 4 Q 25 0 50 4 T 100 4 T 150 4 T 200 4' stroke='%231F1A14' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: repeat-x;
+    background-size: 100px 8px;
+    background-position: center;
+    height: 8px;
+  }
+}
+
+/* Tilt utilities (sticker feel) */
+.tilt-l {
+  transform: rotate(-1.5deg);
+}
+.tilt-r {
+  transform: rotate(1.5deg);
+}
+.tilt-l\\:hover:hover {
+  transform: rotate(-3deg);
+}
